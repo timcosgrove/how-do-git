@@ -11,9 +11,10 @@ jobs:
   test_job:
     runs-on: ubuntu-latest
     steps: 
-      - name : First step
-        run: echo ${{ env.ACTIONS_RUNNER_DEBUG }}
+      - name : Check debug status
+        if: ${{ env.ACTIONS_RUNNER_DEBUG == true }}
+        run: echo "VERBOSE= --verbose" >> $GITHUB_ENV
         
       - name: Second step
-        run: echo ${{ env.FOO }} && return 1
+        run: echo ${{ env.VERBOSE }} && return 1
       
